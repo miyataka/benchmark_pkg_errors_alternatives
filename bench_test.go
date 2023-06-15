@@ -7,7 +7,7 @@ import (
 	stderrors "errors"
 
 	cdberrors "github.com/cockroachdb/errors"
-	arkerrors "github.com/pkg/errors"
+	arkerrors "github.com/goark/errs"
 	pkgerrors "github.com/pkg/errors"
 )
 
