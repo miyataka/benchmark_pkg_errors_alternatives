@@ -158,18 +158,59 @@ func BenchmarkStackFormatting(b *testing.B) {
 		})
 	}
 
-	//  for _, r := range runs {
-	//  	name := fmt.Sprintf("%s-stacktrace-%d", r.format, r.stack)
-	//  	b.Run(name, func(b *testing.B) {
-	//  		err := f(0, r.stack)
-	//  		st := err.(*fundamental).stack.StackTrace()
-	//  		b.ReportAllocs()
-	//  		b.ResetTimer()
-	//  		for i := 0; i < b.N; i++ {
-	//  			stackStr = fmt.Sprintf(r.format, st)
-	//  		}
-	//  		b.StopTimer()
-	//  	})
-	//  }
+	GlobalE = stackStr
+}
+
+func BenchmarkCockroachDBStackFormatting(b *testing.B) {
+	type run struct {
+		name   string
+		stack  int
+		format string
+	}
+	runs := []run{
+		{"cockroachdb/errors", 10, "%s"},
+	}
+
+	var stackStr string
+	for _, r := range runs {
+		name := fmt.Sprintf("%s-%s-stack-%d", r.name, r.format, r.stack)
+		b.Run(name, func(b *testing.B) {
+			err := cdbErrors(0, r.stack)
+			b.ReportAllocs()
+			b.ResetTimer()
+			for i := 0; i < b.N; i++ {
+				stackStr = fmt.Sprintf(r.format, err)
+			}
+			b.StopTimer()
+		})
+	}
+
+	GlobalE = stackStr
+}
+
+func BenchmarkGoarkStackFormatting(b *testing.B) {
+	type run struct {
+		name   string
+		stack  int
+		format string
+	}
+	runs := []run{
+		{"goark/errs", 10, "%+v"},
+	}
+
+	var stackStr string
+	for _, r := range runs {
+		name := fmt.Sprintf("%s-%s-stack-%d", r.name, r.format, r.stack)
+		b.Run(name, func(b *testing.B) {
+			err := cdbErrors(0, r.stack)
+			b.ReportAllocs()
+			b.ResetTimer()
+			for i := 0; i < b.N; i++ {
+				stackStr = fmt.Sprintf(r.format, err)
+			}
+			b.StopTimer()
+		})
+	}
+
 	GlobalE = stackStr
 }
