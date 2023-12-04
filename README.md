@@ -64,3 +64,12 @@ BenchmarkStackFormatting/goark/errs-%+v-stack-60-10                       613336
 PASS
 ok      example 69.441s
 ```
+
+## how to run for cpuprofile
+```bash
+# profile
+go test -bench XXX -cpuprofile=c.out
+
+# view on browser profile
+go tool pprof -http :8080 -timeout 1 c.out
+```
