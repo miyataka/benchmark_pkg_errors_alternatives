@@ -1,6 +1,7 @@
 # benchmark_pkg_errors_alternatives
 
-「次なる `pkg/errors` を探して」の発表で利用した、benchmark用コードです
+「[次なる `pkg/errors` を探して](https://speakerdeck.com/always_allokay/errorswotan-site)」，「[ブログのリアクションから始めるGoのパフォーマンス分析入門](https://speakerdeck.com/always_allokay/burogunoriakusiyonkarashi-merugonopahuomansufen-xi-ru-men)」の発表で利用した、benchmark用コードです
+
 
 ## how to run
 ```bash
